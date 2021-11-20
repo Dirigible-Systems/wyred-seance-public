@@ -9,6 +9,7 @@ Learn Guide: https://learn.adafruit.com/lora-and-lorawan-for-raspberry-pi
 Author: Brent Rubell for Adafruit Industries
 """
 import time
+from adafruit_datetime import datetime
 import busio
 from digitalio import DigitalInOut, Direction, Pull
 import board
