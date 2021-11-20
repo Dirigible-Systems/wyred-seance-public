@@ -62,13 +62,13 @@ while True:
     packet = None
     # draw a box to clear the image
     display.fill(0)
-    display.text('RasPi LoRa', 35, 0, 1)
+    # display.text('RasPi LoRa', 35, 0, 1)
 
     # check for packet rx
     packet = rfm9x.receive()
     if packet is None:
         display.show()
-        display.text('- Waiting for PKT -', 15, 20, 1)
+        display.text('- Waiting for PKT -', 0, 0, 1)
     else:
         # Display the packet text and rssi
         display.fill(0)
