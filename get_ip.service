@@ -1,0 +1,10 @@
+[Unit]
+ Description=My Sample Service
+ After=multi-user.target
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python /opt/dirigible/onboot/rfm9x_check.py > /opt/dirigible/onboot/get_ip_log.log 2>&1
+
+ [Install]
+ WantedBy=multi-user.target
