@@ -56,17 +56,25 @@ RESET = DigitalInOut(board.D25)
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 
 while True:
-    # Clear the image
+    packet = None
+    # draw a box to clear the image
     display.fill(0)
+    display.text('RasPi LoRa', 35, 0, 1)
 
-    # Attempt to set up the RFM9x Module
-    try:
-        rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, 915.0)
-        display.text('RFM9x: Detected', 0, 0, 1)
-    except RuntimeError as error:
-        # Thrown on version mismatch
-        display.text('RFM9x: ERROR', 0, 0, 1)
-        print('RFM9x Error: ', error)
+    # check for packet rx
+    packet = rfm9x.receive()
+    if packet is None:
+        display.show()
+        display.text('- Waiting for PKT -', 15, 20, 1)
+    else:
+        # Display the packet text and rssi
+        display.fill(0)
+        prev_packet = packet
+        packet_text = str(prev_packet, "utf-8")
+        display.text('RX: ', 0, 0, 1)
+        display.text(packet_text, 25, 0, 1)
+        print("Received message", packet, "(", sys.getsizeof(packet), "bytes) at", datetime.now())
+        time.sleep(1)
 
     # Check buttons
     if not btnA.value:
