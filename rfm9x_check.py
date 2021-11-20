@@ -16,7 +16,7 @@ import board
 import adafruit_ssd1306
 # Import the RFM9x radio module.
 import adafruit_rfm9x
-
+import sys
 #from netifaces import interfaces, ifaddresses, AF_INET
 import netifaces
 
